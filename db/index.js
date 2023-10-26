@@ -20,8 +20,8 @@ async function createUser({ username, password, name, location }) {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password, name) 
-      VALUES($1, $2, $3) 
+      INSERT INTO users(username, password, name, location) 
+      VALUES($1, $2, $3, $4) 
       ON CONFLICT (username) DO NOTHING 
       RETURNING *;
     `,
@@ -312,6 +312,24 @@ async function getPostsByTagName(tagName) {
   }
 }
 
+async function deletePostById(id) {
+  try {
+    const {
+      rows: [post],
+    } = await client.query(
+      `
+  DELETE FROM posts
+  WHERE id = $1
+  RETURNING *;
+  `,
+      [id]
+    );
+    return post;
+  } catch (error) {
+    throw error;
+  }
+}
+
 /**
  * TAG Methods
  */
@@ -408,6 +426,7 @@ module.exports = {
   getPostById,
   createPost,
   updatePost,
+  deletePostById,
   getAllPosts,
   getPostsByUser,
   getPostsByTagName,
