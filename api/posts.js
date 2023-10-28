@@ -98,15 +98,33 @@ postsRouter.patch("/:postId", requireUser, async (req, res, next) => {
     next({ name, message });
   }
 });
-
+//Delete post by id
 postsRouter.delete("/:postId", requireUser, async (req, res, next) => {
+  // res.send({ message: "under construction" });
   try {
-    const post = await deletePostById(req.params.id);
-    res.send(post);
+    const { postId } = req.params;
+    const post = await deletePostById(postId);
+    if (!post) {
+      next({
+        name: "NotFound",
+        message: `No post by ID ${postId}`,
+      });
+    } else if (req.user.id !== updatePost.creatorId) {
+      res.status(403);
+      next({
+        name: "WrongUserError",
+        message:
+          "You must be the same user who created this post to perform this action",
+      });
+    } else {
+      const deletePost = await destroyPost(postId);
+      res.send({ success: true, ...deletePost });
+
+      res.send(post);
+    }
   } catch (error) {
     next(error);
   }
-  // res.send({ message: "under construction" });
 });
 
 module.exports = postsRouter;
