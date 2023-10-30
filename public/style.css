@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 25px;
+  background: rgb(205, 93, 19);
+}
+
+p {
+  text-align: left;
+  font-weight: 600;
+  color: rgb(70, 69, 54);
+}
+
+h2 {
+  color: rgb(205, 93, 19);
+  font-weight: bolder;
+  font-size: 1.75em;
+  text-shadow: 3px black;
+}
+body {
+  padding-top: 50px;
+  background: blanchedalmond;
+  color: #232323;
+}
+
+header {
+  background: rgb(205, 93, 19);
+  font-size: 1.5rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding: 0.5em 1em;
+  box-shadow: 0 2px 4px -2px rgb(11, 11, 11);
+  height: 120px;
+}
+
+.name {
+  display: flex;
+  justify-content: center;
+  border: blanchedalmond 5px solid;
+  font-weight: bolder;
+  font-size: 1.5em;
+  color: rgb(205, 202, 30);
+  text-shadow: 1px 1px 2px black;
+}
+
+main {
+  min-height: 150vh;
+  padding: 100px 70px 96px;
+  box-shadow: 0 0 12px -2px rgb(11, 9, 50);
+  color: #eee;
+}
+
+#all-players-container {
+  text-align: center;
+}
+.containers {
+  padding: 2px 16px;
+  justify-content: center;
+}
+.name {
+  padding: 3px;
+  margin: 3px;
+}

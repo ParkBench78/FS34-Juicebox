@@ -2,6 +2,7 @@ const express = require("express");
 const postsRouter = express.Router();
 
 const { requireUser } = require("./utils");
+// const postContainer = document.getElementById("all-posts-container");
 
 const {
   createPost,
