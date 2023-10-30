@@ -3,7 +3,7 @@ const { Client } = require("pg"); // imports the pg module
 const client = new Client({
   connectionString:
     process.env.DATABASE_URL ||
-    "postgres://postgres:password@localhost:5432/juiceboxdev",
+    "postgres://localhost:5432/juiceboxdev",
   ssl:
     process.env.NODE_ENV === "production"
       ? { rejectUnauthorized: false }
@@ -30,6 +30,7 @@ async function createUser({ username, password, name, location }) {
 
     return user;
   } catch (error) {
+    console.log("createUser() throws error")
     throw error;
   }
 }
@@ -116,6 +117,9 @@ async function getUserByUsername(username) {
     );
 
     if (!user) {
+      console.log("UserNotFoundError: A user with that username does not exist")
+
+      return null;
       throw {
         name: "UserNotFoundError",
         message: "A user with that username does not exist",
